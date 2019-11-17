@@ -1,18 +1,12 @@
-import {CHANGE_INPUT, ADD_VALUE, DELETE_ITEM} from './actionTypes'
+import {CHANGE_INPUT, ADD_VALUE, DELETE_ITEM, GET_LIST} from './actionTypes'
 
 const defaultState = {
     inputValue: 'Write Some Here...',
-    list: [
-        'Racing car sprays burning fuel into crowd.',
-        'Japanese princess to wed commoner.',
-        'Australian walks 100km after outback crash.',
-        'Man charged over missing wedding girl.',
-        'Los Angeles battles huge wildfires.',
-    ]
+    list: []
 }
 
 export default (state = defaultState, action) => {
-    console.log(state, action)
+    console.log('state和action', state, action)
     // reducer可以接收state，但是绝不能修改state，返回的是新的state
     let newState = JSON.parse(JSON.stringify(state))
     switch (action.type) {
@@ -25,6 +19,10 @@ export default (state = defaultState, action) => {
             return newState
         case DELETE_ITEM:
             newState.list.splice(action.idx, 1)
+            return newState
+        case GET_LIST:
+            console.log(action.data.data.data)
+            newState.list = action.data.data.data
             return newState
         default:
             return state

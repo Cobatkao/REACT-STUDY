@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import store from './store'
-import { changeInputAction, addValueAction, deleteItemAction } from './store/actionCreators'
+import { changeInputAction, addValueAction, deleteItemAction, getTodoList } from './store/actionCreators'
 import TodoListUI from './TodoListUI'
 
 class TodoList extends Component {
@@ -32,7 +32,7 @@ class TodoList extends Component {
   }
 
   storeChange() {
-    // 感知store发生变化之后，从store里获取最新的数据，然后进行设置
+    // 感知store发生变化之后，从store里获取最新的数据，然后自动渲染
     console.log('----触发视图更新----')
     this.setState(store.getState())
   }
@@ -44,6 +44,11 @@ class TodoList extends Component {
   deleteItem(idx) {
     console.log(idx)
     store.dispatch(deleteItemAction(idx))
+  }
+
+  componentDidMount() {
+    const action = getTodoList() //此时action为函数
+    store.dispatch(action)
   }
 }
 
