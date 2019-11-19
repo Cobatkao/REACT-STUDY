@@ -6,7 +6,7 @@ const defaultState = {
 }
 
 export default (state = defaultState, action) => {
-    console.log('state和action', state, action)
+    // console.log('state和action', state, action)
     // reducer可以接收state，但是绝不能修改state，返回的是新的state
     let newState = JSON.parse(JSON.stringify(state))
     switch (action.type) {
